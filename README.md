@@ -2,6 +2,18 @@
 
 本脚本纯属学习用，请勿用于商业活动
 
+### shadowsocks-manager版本
+
+服务端用到的是shadowsocks-libev版
+
+shadowsocks-libev [前往查看](https://github.com/shadowsocks/shadowsocks-libev)
+
+
+服务端安装的是shadowsocks-manager最新打包版本
+
+具体shadowsocks-manager版本 [查看releases最新版](https://github.com/quniu/shadowsocks-manager/releases)
+
+
 
 ### 安装方法
 
@@ -31,26 +43,18 @@ shadowsocks-manager 安装目录在`/usr/local/`下面
 
 
 
-### shadowsocks-manager版本
 
-服务端安装的是shadowsocks-manager最新打包版本
+### 监听端口
 
-具体shadowsocks-manager版本 [查看releases最新版](https://github.com/quniu/shadowsocks-manager/releases)
+服务端启用`6001`端口
 
-
-
-### 端口说明
-libev版本启用`6001`端口
-
-manager端启用`6002`端口
+客户端启用`6002`端口
 
 
 
 ### 查看shadowsocksr服务
 
 默认安装成功之后会自动启动服务
-
-libev版本
 ```
 service shadowsocks-manager status
 service shadowsocks-manager stop
