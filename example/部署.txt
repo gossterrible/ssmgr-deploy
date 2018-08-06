@@ -11,7 +11,8 @@ pm2 --name "ss-server" -f start server.js -x -- -c default.yml
 后台运行
 screen -ls
 screen -wipe
-PID=$(ps -ef | grep -v grep | grep -i "ss-node" | awk '{print $2}')
+PID=$(ps -ef | grep -v grep | grep -i "SS-node-python" | awk '{print $2}')
+PID=$(ps -ef | grep -v grep | grep -i "SS-node-libev" | awk '{print $2}')
 screen -dmS ss-node ss-manager -m aes-256-cfb -u --manager-address 127.0.0.1:6001
 
 
@@ -23,9 +24,40 @@ netstat -tunlp
 
 服务
 python版
-service shadowsocks-manager-python start
 service shadowsocks-manager-python status
+service shadowsocks-manager-python start
 service shadowsocks-manager-python stop
+
+chkconfig --del shadowsocks-manager-python
+rm -f /etc/init.d/shadowsocks-manager-python
+vim /etc/init.d/shadowsocks-manager-python
+
+chmod +x /etc/init.d/shadowsocks-manager-python
+chkconfig --add shadowsocks-manager-python
+chkconfig shadowsocks-manager-python on
+
+配置
+/etc/shadowsocks-manager-python/config.json
+
+
+ps -ef | grep -v grep | grep -i "/usr/bin/ssserver" | awk '{print $2}'
+
+ssserver -m aes-256-cfb --manager-address 127.0.0.1:6001
+
+ssserver -m aes-256-cfb -p 9000 -k abc123456 --manager-address 127.0.0.1:6001
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 libev版
 service shadowsocks-manager-libev status
@@ -33,8 +65,20 @@ service shadowsocks-manager-libev start
 service shadowsocks-manager-libev stop
 
 
+chkconfig --del shadowsocks-manager-libev
+rm -f /etc/init.d/shadowsocks-manager-libev
+vim /etc/init.d/shadowsocks-manager-libev
+
+chmod +x /etc/init.d/shadowsocks-manager-libev
+chkconfig --add shadowsocks-manager-libev
+chkconfig shadowsocks-manager-libev on
+
 
 配置
-/etc/shadowsocks-manager-python/config.json
 /etc/shadowsocks-manager-libev/config.json
+
+
+
+
+
 

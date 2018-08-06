@@ -100,10 +100,6 @@ do_start() {
                 echo "Starting $SS_NAME failed"
                 RET_VAL=1
             fi
-
-        else
-            echo "Starting $SS_NAME failed"
-            RET_VAL=1
         fi  
     fi
 }
@@ -112,26 +108,24 @@ do_stop() {
     if check_running; then
         kill -9 $PID
         rm -f $PID_FILE
-        if check_running; then
-            echo "Stopping $NAME success"
-        else
-            echo "Stopping $NAME failed"
-            RET_VAL=1
-        fi
+        echo "Stopping $NAME success"
 
         if [ $RET_VAL -eq 0 ]; then
-            kill -9 $SS_PID
-            screen -wipe
             check_manager_running
-            if [ $? -eq 1 ]; then
-                echo "Stopping $SS_NAME success"
+            if [ $? -eq 0 ]; then
+                kill -9 $SS_PID
+                screen -wipe > /dev/null 2>&1
+                check_manager_running
+                if [ $? -eq 1 ]; then
+                    echo "Stopping $SS_NAME success"
+                else
+                    echo "Stopping $SS_NAME failed"
+                    RET_VAL=1
+                fi
             else
                 echo "Stopping $SS_NAME failed"
                 RET_VAL=1
             fi
-        else
-            echo "Stopping $SS_NAME failed"
-            RET_VAL=1
         fi
     else
         echo "$NAME is stopped"

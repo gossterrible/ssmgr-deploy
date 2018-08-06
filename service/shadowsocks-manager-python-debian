@@ -72,7 +72,7 @@ do_start(){
         fi
         
         if [ $RET_VAL -eq 0 ]; then
-            screen -dmS $SS_NAME ss-manager -m aes-256-cfb -u --manager-address 127.0.0.1:$SS_PORT
+            screen -dmS $SS_NAME ssserver -m aes-256-cfb -p 9000 -k abc123456 --manager-address 127.0.0.1:$SS_PORT
             check_manager_running
             if [ $? -eq 0 ]; then
                 echo "Starting $SS_NAME (PID $SS_PID) success"
@@ -80,9 +80,6 @@ do_start(){
                 echo "Starting $SS_NAME failed"
                 RET_VAL=1
             fi
-        else
-            echo "Starting $SS_NAME failed"
-            RET_VAL=1
         fi    
     fi
 }
@@ -91,9 +88,6 @@ do_stop(){
     check_running
     if [ $? -eq 0 ]; then
         $DAEMON -c $CONF -d stop
-        SS_PID=$(ps -ef | grep -v grep | grep -i "$SS_NAME" | awk '{print $2}')
-        kill -9 $SS_PID
-        screen -wipe
         if [ $? -eq 0 ]; then
             echo "Stopping $NAME success"
         else
@@ -103,15 +97,20 @@ do_stop(){
 
         if [ $RET_VAL -eq 0 ]; then
             check_manager_running
-            if [ $? -eq 1 ]; then
-                echo "Stopping $SS_NAME success"
+            if [ $? -eq 0 ]; then
+                kill -9 $SS_PID
+                screen -wipe > /dev/null 2>&1
+                check_manager_running
+                if [ $? -eq 1 ]; then
+                    echo "Stopping $SS_NAME success"
+                else
+                    echo "Stopping $SS_NAME failed"
+                    RET_VAL=1
+                fi
             else
                 echo "Stopping $SS_NAME failed"
                 RET_VAL=1
             fi
-        else
-            echo "Stopping $SS_NAME failed"
-            RET_VAL=1
         fi
     else
         echo "$NAME is stopped"

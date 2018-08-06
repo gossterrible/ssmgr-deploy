@@ -565,7 +565,7 @@ install_check(){
 }
 
 install_prepare_password(){
-    echo "Please enter password for ${software[${order_num}-1]}"
+    echo -e "Please enter password for ${software[${order_num}-1]}"
     read -p "(Default password: abc123456):" shadowsockspwd
     [ -z "${shadowsockspwd}" ] && shadowsockspwd="abc123456"
     echo "--------------------------------------"
@@ -577,19 +577,19 @@ install_prepare_port() {
     while true
     do
     dport=$(shuf -i 9000-9999 -n 1)
-    echo -e "Please enter a port for ${software[${selected}-1]} [9000-9999]"
+    echo -e "Please enter a port for ${software[${order_num}-1]} [1-65535]"
     read -p "(Default port: ${dport}):" shadowsocksport
     [ -z "${shadowsocksport}" ] && shadowsocksport=${dport}
     expr ${shadowsocksport} + 1 &>/dev/null
     if [ $? -eq 0 ]; then
-        if [ ${shadowsocksport} -ge 1 ] && [ ${shadowsocksport} -le 9999 ] && [ ${shadowsocksport:0:1} != 0 ]; then
+        if [ ${shadowsocksport} -ge 1 ] && [ ${shadowsocksport} -le 65535 ] && [ ${shadowsocksport:0:1} != 0 ]; then
             echo "--------------------------------------"
             echo -e "[${green}Info${plain}] port = ${shadowsocksport}"
             echo "--------------------------------------"
             break
         fi
     fi
-    echo -e "[${red}Error${plain}] Please enter a correct number [9000-9999]"
+    echo -e "[${red}Error${plain}] Please enter a correct number [1-65535]"
     done
 }
 
