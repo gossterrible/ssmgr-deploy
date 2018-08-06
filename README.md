@@ -35,7 +35,7 @@ shadowsocks-manager 安装目录在`/usr/local/`下面
 
 服务端安装的是shadowsocks-manager最新打包版本
 
-具体shadowsocks-manager版本(查看releases最新版)[https://github.com/quniu/shadowsocks-manager]
+具体shadowsocks-manager版本 [查看releases最新版](https://github.com/quniu/shadowsocks-manager/releases)
 
 
 
