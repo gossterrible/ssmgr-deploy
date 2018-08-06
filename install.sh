@@ -738,8 +738,8 @@ start_pm2_manager(){
         exit 1
     fi
 
-    pm2 startup
-    pm2 save
+    pm2 startup > /dev/null 2>&1
+    pm2 save > /dev/null 2>&1
     echo -e "[${green}Info${plain}] PM2 save service success!"
     cd ${cur_dir} 
     install_cleanup   
