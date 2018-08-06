@@ -41,15 +41,19 @@ chkconfig shadowsocks-manager-python on
 
 
 ps -ef | grep -v grep | grep -i "/usr/bin/ssserver" | awk '{print $2}'
+ps -ef | grep -v grep | grep -i "SS-node-python" | awk '{print $2}'
 
-ssserver -m aes-256-cfb --manager-address 127.0.0.1:6001
+ssserver --manager-address 127.0.0.1:6000 -c /etc/shadowsocks-manager-python/config.json
 
-ssserver -m aes-256-cfb -p 9000 -k abc123456 --manager-address 127.0.0.1:6001
+ssserver -m aes-256-cfb -p 9000 -k abc123456 --manager-address 127.0.0.1:6000
+
+cd /usr/local/shadowsocks-manager
+node server.js -c ss-python.json
 
 
+pm2 --name "ss-python" -f start server.js -x -- -c ss-python.json
 
-
-
+cat ~/.ssmgr/ss-python.json
 
 
 
