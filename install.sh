@@ -764,6 +764,7 @@ install_shadowsocks_manager(){
 
 
 config_shadowsocks_manager(){
+    echo -e "[${green}------------shadowsocks_manager--${order_num}-------------${plain}]";
     cat > ~/.ssmgr/default.yml<<-EOF
 type: s
 
