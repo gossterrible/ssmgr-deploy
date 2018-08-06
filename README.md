@@ -1,8 +1,9 @@
-### shadowsocks-manager服务端一键部署脚本
+此脚本为shadowsocks-manager服务端一键部署脚本
 
 本脚本纯属学习用，请勿用于商业活动
 
-### shadowsocks-manager版本
+
+### 版本介绍
 
 服务端用到的是shadowsocks-libev版
 
@@ -46,9 +47,11 @@ shadowsocks-manager 安装目录在`/usr/local/`下面
 
 ### 监听端口
 
-服务端启用`6001`端口
+服务端启用端口`6001`
 
-客户端启用`6002`端口
+客户端启用端口`6002`（亦可自己定义）
+
+客户端启用密码`需要自己填写`
 
 
 
