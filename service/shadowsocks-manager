@@ -19,12 +19,11 @@ if [ -f /usr/local/bin/ss-server ]; then
 elif [ -f /usr/bin/ss-server ]; then
     DAEMON=/usr/bin/ss-server
 fi
-NAME=shadowsocks-manager-libev
-CONF=/etc/shadowsocks-manager-libev/config.json
-SS_NAME=SS-node-libev
-SS_PORT=6001
+NAME=shadowsocks-manager
+CONF=/etc/shadowsocks-manager/config.json
+SS_NAME=shadowsocks-manager-node
 PID_DIR=/var/run
-PID_FILE=$PID_DIR/shadowsocks-manager-libev.pid
+PID_FILE=$PID_DIR/shadowsocks-manager.pid
 RET_VAL=0
 
 [ -x $DAEMON ] || exit 0
@@ -92,7 +91,7 @@ do_start() {
         fi
 
         if [ $RET_VAL -eq 0 ]; then
-            screen -dmS $SS_NAME ss-manager -m aes-256-cfb -u --manager-address 127.0.0.1:$SS_PORT
+            screen -dmS $SS_NAME ss-manager -m aes-256-cfb -u --manager-address 127.0.0.1:6001
             check_manager_running
             if [ $? -eq 0 ]; then
                 echo "Starting $SS_NAME (PID $SS_PID) success"

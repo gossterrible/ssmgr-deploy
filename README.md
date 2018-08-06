@@ -40,8 +40,6 @@ shadowsocks-manager 安装目录在`/usr/local/`下面
 
 
 ### 端口说明
-python版本启用`6000`端口
-
 libev版本启用`6001`端口
 
 manager端启用`6002`端口
@@ -52,16 +50,9 @@ manager端启用`6002`端口
 
 默认安装成功之后会自动启动服务
 
-python版本
-```
-service shadowsocks-manager-python status
-service shadowsocks-manager-python stop
-service shadowsocks-manager-python start
-```
-
 libev版本
 ```
-service shadowsocks-manager-libev status
-service shadowsocks-manager-libev stop
-service shadowsocks-manager-libev start
+service shadowsocks-manager status
+service shadowsocks-manager stop
+service shadowsocks-manager start
 ```
