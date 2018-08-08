@@ -7,12 +7,12 @@
 
 服务端用到的是shadowsocks-libev版
 
-shadowsocks-libev [前往查看](https://github.com/shadowsocks/shadowsocks-libev)
+shadowsocks-libev： [前往查看shadowsocks-libev](https://github.com/shadowsocks/shadowsocks-libev)
 
 
 服务端安装的是shadowsocks-manager最新打包版本
 
-具体shadowsocks-manager版本 [查看releases最新版](https://github.com/quniu/shadowsocks-manager/releases)
+shadowsocks-manager： [前往查看shadowsocks-manager最新版](https://github.com/quniu/shadowsocks-manager/releases)
 
 
 
