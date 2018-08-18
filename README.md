@@ -39,7 +39,7 @@ chmod +x install.sh
 ./install.sh 2>&1 | tee shadowsocks-manager.log
 ```
 
-设置固定时间自动重启
+设置固定时间自动重启（选最后一项）
 ```
 ./install.sh 2>&1 | tee restart-time.log
 ```
